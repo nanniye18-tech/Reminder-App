@@ -1,17 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Smart Reminders</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Weekly Timetable</title>
+    
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
-    <div class="card">
-        <h1>⏰ Remind Me</h1>
-        <input type="text" id="taskInput" placeholder="Enter task name...">
-        <input type="datetime-local" id="timeInput">
-        <button onclick="addReminder()">Set Alarm</button>
-        <ul id="list"></ul>
+
+    <div class="container">
+        <div class="dark-mode-container">
+            <label class="switch">
+                <input type="checkbox" id="darkModeToggle" onclick="toggleDarkMode()">
+                <span class="slider round"></span>
+            </label>
+            <span><i class="fa-solid fa-moon"></i> Dark Mode</span>
+        </div>
+
+        <h1><i class="fa-solid fa-calendar-week"></i> My Weekly Timetable</h1>
+        
+        <div class="input-section">
+            <div class="input-group">
+                <i class="fa-solid fa-book"></i>
+                <input type="text" id="subject" placeholder="Subject Name">
+            </div>
+
+            <div class="input-group">
+                <i class="fa-solid fa-calendar-day"></i>
+                <select id="day">
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <i class="fa-solid fa-clock"></i>
+                <input type="time" id="classTime">
+            </div>
+
+            <button onclick="addToTimetable()" class="btn-add"><i class="fa-solid fa-plus"></i> Add Class</button>
+            <button onclick="downloadPDF()" class="btn-pdf"><i class="fa-solid fa-file-pdf"></i> PDF</button>
+            <button onclick="clearTimetable()" class="btn-clear"><i class="fa-solid fa-trash"></i> Clear</button>
+        </div>
+
+        <table id="timetable">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                </tr>
+            </thead>
+            <tbody id="timetableBody">
+                </tbody>
+        </table>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
