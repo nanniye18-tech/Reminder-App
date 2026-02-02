@@ -1,21 +1,58 @@
-function addReminder() {
-    const task = document.getElementById('taskInput').value;
-    const time = document.getElementById('timeInput').value;
-    
-    if (!task || !time) return alert("Please fill in both!");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-    const reminderTime = new Date(time).getTime();
-    const now = new Date().getTime();
-
-    if (reminderTime < now) return alert("You can't set a reminder for the past!");
-
-    // Add to screen
-    const li = document.createElement('li');
-    li.innerHTML = `<strong>${task}</strong><br>${new Date(time).toLocaleString()}`;
-    document.getElementById('list').appendChild(li);
-
-    // Set the "Alarm"
-    setTimeout(() => {
-        alert(`🔔 TIME'S UP: ${task}`);
-    }, reminderTime - now);
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 20px;
+    transition: 0.3s;
 }
+
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 950px;
+}
+
+/* Dark Mode Styles */
+body.dark-theme { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); }
+body.dark-theme .container { background: rgba(30, 30, 46, 0.95); color: white; }
+body.dark-theme .input-group { background: #1e1e2e; border-color: #444; }
+body.dark-theme input, body.dark-theme select { background: transparent; color: white; }
+body.dark-theme td { background: #252539; color: white; border-bottom: 1px solid #444; }
+
+/* Inputs and Groups */
+.input-section { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; background: #f8f9fa; padding: 15px; border-radius: 12px; }
+body.dark-theme .input-section { background: #252539; }
+
+.input-group { display: flex; align-items: center; background: white; padding: 0 10px; border: 1px solid #ddd; border-radius: 8px; flex: 1; min-width: 150px; }
+.input-group i { color: #667eea; margin-right: 8px; }
+input, select { border: none; padding: 12px 5px; width: 100%; outline: none; }
+
+/* Buttons */
+button { padding: 12px 18px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; color: white; }
+.btn-add { background: #667eea; }
+.btn-pdf { background: #27ae60; }
+.btn-clear { background: #ff4757; }
+
+/* Table */
+table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 12px; overflow: hidden; }
+th { background: #667eea; color: white; padding: 15px; }
+td { padding: 15px; text-align: center; border-bottom: 1px solid #eee; background: white; }
+.class-cell { background: #eef2ff !important; color: #4834d4; font-weight: 600; }
+
+/* Dark Mode Toggle Switch */
+.dark-mode-container { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.switch { position: relative; width: 40px; height: 20px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
+.slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+input:checked + .slider { background-color: #667eea; }
+input:checked + .slider:before { transform: translateX(20px); }
