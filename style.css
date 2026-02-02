@@ -1,0 +1,21 @@
+function addReminder() {
+    const task = document.getElementById('taskInput').value;
+    const time = document.getElementById('timeInput').value;
+    
+    if (!task || !time) return alert("Please fill in both!");
+
+    const reminderTime = new Date(time).getTime();
+    const now = new Date().getTime();
+
+    if (reminderTime < now) return alert("You can't set a reminder for the past!");
+
+    // Add to screen
+    const li = document.createElement('li');
+    li.innerHTML = `<strong>${task}</strong><br>${new Date(time).toLocaleString()}`;
+    document.getElementById('list').appendChild(li);
+
+    // Set the "Alarm"
+    setTimeout(() => {
+        alert(`🔔 TIME'S UP: ${task}`);
+    }, reminderTime - now);
+}
